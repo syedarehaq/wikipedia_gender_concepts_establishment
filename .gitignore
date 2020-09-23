@@ -1,0 +1,50 @@
+# Big data directories
+big-data/
+
+# Jupyter Notebook stuff
+.ipynb_checkpoints
+*/.ipynb_checkpoints/*
+
+# Stray visual studio files
+.vs
+
+# Pycache
+__pycache__
+
+## python stuffs
+*.pyc
+*.pyo
+*.gz
+*.so
+
+## MacOSX ds store file needs to be ignored
+.DS_Store/
+.DS_Store
+
+
+## any directory or file named untracked will be automatically untrecked
+untracked
+## Any file that is staryed from discovery cluster
+slurm-*
+
+# R History files
+.Rhistory
+.Rapp.history
+
+# R Session Data files
+.RData
+
+
+# Environments
+.env
+.venv
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# Spyder project settings
+.spyderproject
+.spyproject
+.Rproj.user
