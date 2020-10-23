@@ -75,6 +75,6 @@ plt.show()
 writelines = []
 writelines.append(["concept", "number_of_alexander_street_docs_appeared_in"])
 writelines.extend(sorted(concept_count.items(), key = lambda x: x[1], reverse=True))
-with open("../output/%s_alex_street_concept_appearence_count_descendinc.csv" %output_code, "w") as f:
+with open("../output/%s_alex_street_concept_appearence_count_descending.csv" %output_code, "w") as f:
     writer = csv.writer(f)
     writer.writerows(writelines)
