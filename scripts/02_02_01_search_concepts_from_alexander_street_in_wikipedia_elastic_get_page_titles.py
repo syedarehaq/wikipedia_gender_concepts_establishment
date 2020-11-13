@@ -3,13 +3,14 @@
 """
 Summary:
     In this script we will read all the concpets that are coming from
-    alexander street and search in how many titles of wikipedia they match
+    alexander street and search in how many titles of wikipedia they appear
     and in how many article text they appear
 Input:
-    The derived unique concepts file based on Laura Alexander Street rake concpets
-    ../output/01_01_01_alex_street_concept_appearence_count_descendinc.csv
+    The filtered concept list
+    ../input/raw/phrases_filtered_20201112_laura_rebekah.csv
 Output
-    It will create a csv
+    It will create a json for each of the concept and put corresponding page titles
+    and last revision data
 """
 
 import json
@@ -23,16 +24,15 @@ from tqdm import tqdm
 from helpers.elastic_scroll import ElasticScroll
 
 # %%
-output_code = "02_01_01"
+output_code = "02_02_01"
 
 # %%
 ## Load the alexander streets concpets created by Laura
 df_concepts = pd.read_csv("../input/raw/phrases_filtered_20201112_laura_rebekah.csv")
 
 alex_street_concepts = df_concepts["concept_from_alex_street"].values
-
-
-#alex_street_concepts = ["labor unionism among negros"] ## It is here for debugging purpose
+### For testing
+#alex_street_concepts = ["labor unionism among negros","aaa program","acme art"] ## It is here for debugging purpose
 
 df_concept_appearence_count = pd.DataFrame(columns=["concept_from_alex_street",
     "count_unique_wiki_article_text_appeared_in",
@@ -44,14 +44,10 @@ dict_text_search_fields_to_df_column = {
     "page_title":"count_unique_wiki_article_title_appeared_in"
 }
 
-for concept in tqdm(alex_street_concepts):
-    count_doc = {}
-    count_doc["concept_from_alex_street"] = concept
-    count_doc["count_unique_wiki_article_text_appeared_in"] = 0
-    count_doc["count_unique_wiki_article_title_appeared_in"] = 0
-    count_doc["count_unique_alexander_street_docs_appeared_in"] = int(number_of_alexander_street_docs_appeared_in)
-
-    for text_search_field in dict_text_search_fields_to_df_column:
+for text_search_field in dict_text_search_fields_to_df_column:
+    concept_to_wiki_title_docs = dict()
+    for concept in tqdm(alex_street_concepts):
+        concept_to_wiki_title_docs[concept] = list()
         ## First I will convert the whole phrase into string and the lower and split it
         ## then I will remove all the leading and trailing whitespace from the individual
         ## tokens
@@ -95,26 +91,21 @@ for concept in tqdm(alex_street_concepts):
 
         query_doc = dict()
         query_doc["query"] = query
-
-        print(query_doc)
-        break
-        res = requests.post(url="http://localhost:9200/wikipedia-20200820/_count", json= query_doc)
+        query_doc["_source"] = ["page_title","page_id","timestamp"] # Here the timestamp is the last revision timestamp
+        res = requests.post(url="http://localhost:9200/wikipedia-20200820/_search", json= query_doc)
         ## if res.ok is True then
         ## The res object has a json that looks like below
         """
         {'count': 2,
          '_shards': {'total': 1, 'successful': 1, 'skipped': 0, 'failed': 0}}
         """
-
         if res.ok:
             result_doc = res.json()
-            count_doc[dict_text_search_fields_to_df_column[text_search_field]] = result_doc["count"]
-    break
+            for hit in result_doc["hits"]["hits"]:
+                concept_to_wiki_title_docs[concept].append(hit["_source"])
     #df_concept_appearence_count = df_concept_appearence_count.append(count_doc, ignore_index=True)
-
-df_concept_appearence_count = df_concept_appearence_count.sort_values(by=["count_unique_wiki_article_text_appeared_in"], ascending=False)
-df_concept_appearence_count.to_csv("../output/%s_alex_street_concept_appearence_count_in_wikipedia_all.csv" %output_code, index=False)
-
+    with open("../output/%s_alex_street_concept_to_wiki_pagetitles_of_searched_%s.json" %(output_code,text_search_field),"w", encoding="utf-8") as f:
+        json.dump(concept_to_wiki_title_docs, f, ensure_ascii=False)
 
 
 ## Later to collect the page title etc.
