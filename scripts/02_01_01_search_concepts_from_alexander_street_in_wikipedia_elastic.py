@@ -99,13 +99,13 @@ for concept,number_of_alexander_street_docs_appeared_in in tqdm(alex_street_conc
                     "ns":0
                 }
             },
-            {
-                "range":{
-                    "timestamp":{
-                        "gte": "2020-01-01"
-                    }
-                }
-            }
+            # {
+            #     "range":{
+            #         "timestamp":{
+            #             "gte": "2020-01-01"
+            #         }
+            #     }
+            # }
         ]
         span_doc = nested_dict()
         span_doc["span_near"]["clauses"]=list()
