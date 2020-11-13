@@ -14,7 +14,6 @@ Output
 
 import json
 from collections import Counter, defaultdict
-import matplotlib.pyplot as plt
 import csv
 import pandas as pd
 import requests
@@ -81,7 +80,7 @@ for concept,number_of_alexander_street_docs_appeared_in in tqdm(alex_street_conc
         ## First I will convert the whole phrase into string and the lower and split it
         ## then I will remove all the leading and trailing whitespace from the individual
         ## tokens
-        concept_tokens = map(lambda x: x..strip(), str(concept).lower().strip().split())
+        concept_tokens = map(lambda x: x.strip(), str(concept).lower().strip().split())
 
         ## Now building elasticsearch fuzzy match query
         ## Refs
