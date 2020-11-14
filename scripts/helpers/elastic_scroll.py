@@ -11,6 +11,20 @@ class ElasticScroll(object):
             If not provided, creates a new session object.
         scroll_ctx (str, optional): Scroll context time. Default: ``1m``.
         scroll_size (int, optional): Scroll page size. Default: ``20``.
+
+    Example:
+    query = {
+        "match": {
+            "page_title": {
+                 "query": "documentation"
+                }
+            }
+        }
+ 
+    for _id, _doc in ElasticScroll('http://localhost:9200', 'wikipedia-20200820', scroll_size=5).scroll(source = ["page_title"],query=query):
+        print(f'{_id}:\n{json.dumps(_doc, indent=2)}')
+        break 
+
     """
 
     def __init__(self, host, index, session=requests.session(), scroll_ctx='1m', scroll_size=20):
@@ -20,7 +34,7 @@ class ElasticScroll(object):
         self.setup_url = f'{host}/{index}/_search?scroll={scroll_ctx}&size={scroll_size}'
         self.scroll_url = f'{host}/_search/scroll'
     
-    def scroll(self, query={'match_all': {}}):
+    def scroll(self, source = None, query={'match_all': {}}):
         """A generator function to scroll trhough all documents from an index.
         Args:
             query (:obj:`dict`, optional): Elasticsearch query json.
@@ -33,10 +47,13 @@ class ElasticScroll(object):
         Raises:
             requests.exceptions.HTTPError: If Elasticsearch REST client sends an error.
         """
-
-        queries = [{'sort': ['_doc'], 'query': query}, {'scroll': self.scroll_ctx}]
+        if not source:
+            queries = [{'sort': ['_doc'], 'query': query}, {'scroll': self.scroll_ctx}]
+        else:
+            queries = [{'sort': ['_doc'], 'query': query, "_source": source}, {'scroll': self.scroll_ctx}]
+        #queries = [{'sort': ['_doc'], 'query': query}, {'scroll': self.scroll_ctx}]
         urls = [self.setup_url, self.scroll_url]
-        
+        #print(queries)
         has_scroll_ctx = False
         while True:
             response = self.session.post(url=urls[has_scroll_ctx], json=queries[has_scroll_ctx])
