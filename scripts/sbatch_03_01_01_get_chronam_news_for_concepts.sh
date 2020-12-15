@@ -5,8 +5,8 @@
 #SBATCH --mem=200GB
 #SBATCH --cpus-per-task=16
 #SBATCH --time=7-24:00:00
-#SBATCH --output=output/chronam_%j.out
-#SBATCH --error=error/chronam_%j.err
+#SBATCH --output=chronam_%j.out
+#SBATCH --error=chronam_%j.err
 
 source ~/.bashrc
 
