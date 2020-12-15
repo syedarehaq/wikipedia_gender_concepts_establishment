@@ -13,4 +13,4 @@ source ~/.bashrc
 module load python/3.8.1
 
 source /work/nelsongroup/haque.s/chroniclingamerica/wikipedia_gender_concepts_establishment/venv/bin/activate
-python3 03_01_01_search_concepts_in_chronicling_america.py
+python3 -u 03_01_01_search_concepts_in_chronicling_america.py
