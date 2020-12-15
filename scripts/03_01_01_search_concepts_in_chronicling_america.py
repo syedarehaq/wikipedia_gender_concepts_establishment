@@ -17,14 +17,9 @@ Output
     ../output/03_01_01_alex_street_concept_to_wiki_pagetitles_of_searched_text.json
     ../output/03_01_01_alex_street_concept_to_wiki_pagetitles_of_searched_page_title.json
 """
-
 import json
-from collections import Counter, defaultdict
-import csv
 import pandas as pd
 import requests
-import pprint
-from tqdm import tqdm
 ## imported from custom helper library accompanying this project
 from helpers.chroniclingamerica import ChronAm
 # %%
@@ -38,7 +33,7 @@ alex_street_concept_name_to_concept_id = df_concepts.set_index("concept_from_ale
 alex_street_concept_name_to_dash_separated_concept_name = df_concepts.set_index("concept_from_alex_street").to_dict()["alternative_phrase"]
 
 #chron_am_search = requests.get("http://chroniclingamerica.loc.gov/search/pages/results/?proxtext=%s&proxdistance=2&format=json" %(search_phrase)).json()
-all_chronam_docs_file = open("../output/%s_all_docs.json" %(output_code),"a", encoding="utf-8")
+all_chronam_docs_file = open("../output/untracked/%s_all_docs.json" %(output_code),"a", encoding="utf-8")
 all_chronam_doc_ids = set()
 ## chronicling america concept search
 ## Testing dog concept
@@ -53,7 +48,7 @@ for search_phrase,dash_seprated_search_phrase in alex_street_concept_name_to_das
     current_phrase_doc_ids_all = set()
     ## First we will work with the regular non-dash separated concept
     fetcher = ChronAm(search_phrase,language="eng",proxdistance=2)
-    current_phrase_doc_file = open("../output/%s_current_phrase_%s_docs.json" %(output_code, alex_street_concept_name_to_concept_id[search_phrase]),"a", encoding="utf-8")
+    current_phrase_doc_file = open("../output/untracked/%s_current_phrase_%s_docs.json" %(output_code, alex_street_concept_name_to_concept_id[search_phrase]),"a", encoding="utf-8")
     for result in fetcher.fetch():
         if result["id"] not in all_chronam_doc_ids:
             all_chronam_doc_ids.add(result["id"])
