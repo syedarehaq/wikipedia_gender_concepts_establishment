@@ -71,14 +71,31 @@ def print_it(text):
 
 
 class ChronAm():
-    def __init__(self, search_text, page=1, max_pages=0):
+    def __init__(self, search_text, language=None, proxdistance=2, page=1, max_pages=0):
         """Defines the fetcher URL"""
         self.page = page
         self.max_pages = max_pages
 
         params = []
         params.append("format=json")
-        params.append('phrasetext=%s' % search_text)
+        #params.append('phrasetext=%s' % search_text)
+        ## modifying to proxtext
+        params.append('proxtext=%s' % search_text)
+
+        ## proxdistance defince within which distance
+        ## we should find the space seperated phrases
+        ## by default we are using 2 because in wikipedia
+        ## elasticsearch we were using slop=1 and here
+        ## we are giving one extra slop because of OCR
+        ## linebreaks
+        params.append('proxdistance=%d' % proxdistance)
+
+        ## By defaul we will search in whole chronicling
+        ## America but we can also specify a language
+        ## TODO: work to include more than one langauge
+        if language:
+            params.append('language=%s' % language)
+        ## Example language language=eng
 
         self.url = URL_FORMAT % '&'.join(params)
         self.url += '&page=%d'
@@ -112,6 +129,7 @@ class ChronAm():
 
     def fetch(self):
         """Starts the fetching process"""
+        #print(self.url)
         self.total_pages = self.get_total_pages()
         for i in range(self.page, self.total_pages + 1):
             for item in self.get_data(i):
