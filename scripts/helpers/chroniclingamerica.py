@@ -118,8 +118,8 @@ class ChronAm():
     def get_data(self, page_number):
         """Fetches a page of items from the API"""
         percent = 100.0 * page_number / self.total_pages
-        print('Fetching page %i of %i ... %f%%' % (
-            page_number, self.total_pages, percent))
+        # print('Fetching page %i of %i ... %f%%' % (
+        #     page_number, self.total_pages, percent))
 
         r = requests.get(self.url % page_number)
         resp = (json.loads(r.text))

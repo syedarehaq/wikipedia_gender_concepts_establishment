@@ -20,6 +20,7 @@ Output
 import json
 import pandas as pd
 import requests
+from time import sleep
 ## imported from custom helper library accompanying this project
 from helpers.chroniclingamerica import ChronAm
 # %%
@@ -58,6 +59,7 @@ for search_phrase,dash_seprated_search_phrase in alex_street_concept_name_to_das
             current_phrase_doc_ids_all.add(result["id"])
             json.dump(result,current_phrase_doc_file, ensure_ascii=False)
             current_phrase_doc_file.write("\n")
+        sleep(1)
     ## Then we will work with the alternate search phrase that is dash separated
     ## This time we will only append current doc if the id is not already in the current doc
     if dash_seprated_search_phrase:
@@ -73,5 +75,7 @@ for search_phrase,dash_seprated_search_phrase in alex_street_concept_name_to_das
                 current_phrase_doc_ids_all.add(result["id"])
                 json.dump(result,current_phrase_doc_file, ensure_ascii=False)
                 current_phrase_doc_file.write("\n")
+            sleep(1)
         current_phrase_doc_file.close()
+    sleep(3)
 all_chronam_docs_file.close()
