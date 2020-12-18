@@ -25,7 +25,7 @@ import csv
 import pandas as pd
 import requests
 import pprint
-#from tqdm import tqdm
+from tqdm import tqdm
 ## imported from custom helper library accompanying this project
 from helpers.elastic_scroll import ElasticScroll
 
@@ -138,7 +138,7 @@ for chunked_file_basename in file_basenames:
                     
                     source = ["page_title"] #,"page_id","timestamp"] # Here the timestamp is the last revision timestamp
                     
-                    for _id, _doc in ElasticScroll('http://localhost:9200', 'wikipedia-20200820', scroll_size=9999).scroll(source = source,query=query):
+                    for _id, _doc in ElasticScroll('http://localhost:9200', 'wikipedia-20200820', scroll_size=5000).scroll(source = source,query=query):
                         concept_to_wiki_title_docs["wikipedia_page_titles_appeared_in"].add(_doc["page_title"])
                 concept_to_wiki_title_docs["wikipedia_page_titles_appeared_in"] = list(concept_to_wiki_title_docs["wikipedia_page_titles_appeared_in"])
                 ## We are appending each concpet as a newline delimnited json
