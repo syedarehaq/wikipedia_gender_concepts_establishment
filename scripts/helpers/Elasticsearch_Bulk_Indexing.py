@@ -33,7 +33,7 @@ class ElasticBulk(object):
         docs = list()
         entries = 0
 
-        for doc in generator_fn():
+        for doc in generator_fn:
             docs.append({"index": {}})
             docs.append(doc)
             entries += 1
