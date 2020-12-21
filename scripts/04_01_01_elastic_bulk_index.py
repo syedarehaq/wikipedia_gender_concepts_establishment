@@ -30,7 +30,7 @@ parser.add_argument('-p', '--port', type=int, help='elasticsearch port in localh
 parser.add_argument('-f', '--filename', help='a newline delimited json file')
 ## See python argparse default vs const
 ## https://stackoverflow.com/questions/24272228/default-value-of-commandline-parameters-when-no-value-is-provided?noredirect=1&lq=1
-parser.add_argument('-b', '--bulksize', type=int, help='size of the bulk operation', default=1000, const=1000)
+parser.add_argument("-b", "--bulksize", type=int, help="size of the bulk operation", nargs="?", default=1000, const=1000)
 args = parser.parse_args()
 
 # %%
