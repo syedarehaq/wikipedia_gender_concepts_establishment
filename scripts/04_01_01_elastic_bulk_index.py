@@ -28,11 +28,14 @@ parser = argparse.ArgumentParser(
 parser.add_argument('-i','--index', help='Name of the elastic search index')
 parser.add_argument('-p', '--port', type=int, help='elasticsearch port in localhost')
 parser.add_argument('-f', '--filename', help='a newline delimited json file')
+## See python argparse default vs const
+## https://stackoverflow.com/questions/24272228/default-value-of-commandline-parameters-when-no-value-is-provided?noredirect=1&lq=1
+parser.add_argument('-b', '--bulksize', type=int, help='size of the bulk operation', default=1000, const=1000)
 args = parser.parse_args()
 
 # %%
 # Load the json file and yield it to elastic bulk insert
-es_bulk = ElasticBulk(f"http://localhost:{args.port}", f"{args.index}")
+es_bulk = ElasticBulk(f"http://localhost:{args.port}", f"{args.index}", bulk_size=args.bulksize)
 
 def lazy_read_file_line_by_line():
     with open(args.filename,"r") as f:
