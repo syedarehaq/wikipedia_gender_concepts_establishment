@@ -30,7 +30,7 @@ parser.add_argument('-p', '--port', type=int, help='elasticsearch port in localh
 parser.add_argument('-f', '--filename', help='a newline delimited json file')
 args = parser.parse_args()
 
-%%
+# %%
 # Load the json file and yield it to elastic bulk insert
 es_bulk = ElasticBulk(f"http://localhost:{args.port}", f"{args.index}")
 
