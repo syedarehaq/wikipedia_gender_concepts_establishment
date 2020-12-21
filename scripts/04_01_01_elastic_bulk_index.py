@@ -34,9 +34,9 @@ args = parser.parse_args()
 # Load the json file and yield it to elastic bulk insert
 es_bulk = ElasticBulk(f"http://localhost:{args.port}", f"{args.index}")
 
-def lazy_read_file_line_by_line(fname):
-    with open(fname,"r") as f:
+def lazy_read_file_line_by_line():
+    with open(args.filename,"r") as f:
         for line in f:
             yield line
 
-es_bulk.upload_bulk(generator_fn=lazy_read_file_line_by_line(args.filename))
+es_bulk.upload_bulk(generator_fn=lazy_read_file_line_by_line)

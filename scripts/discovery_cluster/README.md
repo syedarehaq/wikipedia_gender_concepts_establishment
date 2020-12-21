@@ -8,6 +8,7 @@ cp elasticsearch-7.10.1-linux-x86_64.tar.gz /srv/
 tar -xzf /srv/elasticsearch-7.10.1-linux-x86_64.tar.gz 
 module load oracle_java/jdk1.8.0_181
 curl -XGET "127.0.0.1:9200"
+python3 04_01_01_elastic_bulk_index.py --index wikipedia-20200820 --port 9200 --filename /work/nelsongroup/haque.s/wikipedia/enwiki-20200820-pages-articles-multistream.json
 ```
 
 ```
