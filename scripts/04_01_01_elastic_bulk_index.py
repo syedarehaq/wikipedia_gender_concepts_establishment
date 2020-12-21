@@ -2,23 +2,16 @@
 
 """
 Summary:
-    In this script we will read all the concpets that are coming from
-    alexander street and create a newline separated json doc for each
-    concpet that concpets all the chronicling america news that contains
-    the phrase. It also creates a file that contains all the possible
-    unique news that we gatherd from all these concpets into one single
-    blob of file
+    This is a helper file to store contents of a newline delimited json
+    file into an elastic search index
 Input:
-    The filtered concept list
-    ../input/raw/phrases_filtered_20201124_with_alternative.csv
+    read the argparse, it takes three arguments
+    write python 04_01_01_elastic_bulk_index.py --help
 Output
-    It will create a json for each of the concept and put corresponding page titles
-    in two files titled
-    ../output/03_01_01_alex_street_concept_to_wiki_pagetitles_of_searched_text.json
-    ../output/03_01_01_alex_street_concept_to_wiki_pagetitles_of_searched_page_title.json
+    Puts the contents of a newline delimited json files
+    into an elasticsearch object
 """
 import json
-import pandas as pd
 import requests
 import argparse
 ## imported from custom helper library accompanying this project
@@ -30,12 +23,20 @@ output_code = "04_01_01"
 
 # %%
 parser = argparse.ArgumentParser(
-        description="API to search Chronicling America",
+        description="Script to bulk insert a newline separated json file",
         formatter_class=argparse.ArgumentDefaultsHelpFormatter)
-parser.add_argument('index_name', help='Name of the elastic search index')
-parser.add_argument('-y', '--year', type=int, help='Max year')
+parser.add_argument('-i','--index', help='Name of the elastic search index')
+parser.add_argument('-p', '--port', type=int, help='elasticsearch port in localhost')
+parser.add_argument('-f', '--filename', help='a newline delimited json file')
 args = parser.parse_args()
 
-# %%
-## Load the alexander streets concpets created by Laura
-df_concepts = pd.read_csv("../input/derived/03_00_01_phrases_filtered_20201124_with_alternative.csv", keep_default_na=False)
+%%
+# Load the json file and yield it to elastic bulk insert
+es_bulk = ElasticBulk(f"http://localhost:{args.port}", f"{args.index}")
+
+def lazy_read_file_line_by_line(fname):
+    with open(fname,"r") as f:
+        for line in f:
+            yield line
+
+es_bulk.upload_bulk(generator_fn=lazy_read_file_line_by_line(args.filename))
