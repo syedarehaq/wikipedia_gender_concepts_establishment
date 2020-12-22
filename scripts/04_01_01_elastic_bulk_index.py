@@ -40,6 +40,6 @@ es_bulk = ElasticBulk(f"http://localhost:{args.port}", f"{args.index}", bulk_siz
 def lazy_read_file_line_by_line():
     with open(args.filename,"r") as f:
         for line in f:
-            yield line
+            yield json.loads(line)
 
 es_bulk.upload_bulk(generator_fn=lazy_read_file_line_by_line)
