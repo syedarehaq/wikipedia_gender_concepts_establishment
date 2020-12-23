@@ -1,7 +1,7 @@
 #!/bin/bash
 nodename=$1
 echo $nodename;
-input_file_current_node="/work/nelsongroup/haque.s/chroniclingamerica/wikipedia_gender_concepts_establishment/input/derived/discovery_input_for_each_node/"$1
+input_file_current_node="/work/nelsongroup/haque.s/chroniclingamerica/wikipedia_gender_concepts_establishment/input/derived/discovery_input_for_each_node/"$1".txt"
 while IFS= read -r line
 do
 	echo $line;
