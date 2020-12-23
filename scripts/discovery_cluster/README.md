@@ -12,6 +12,8 @@ python3 04_01_01_elastic_bulk_index.py --index wikipedia-20200820 --port 9200 --
 ```
 
 ```
+ssh c3178
+cd /srv/tmp
 curl -XGET "http://localhost:9200/_cat/indices?v"
 curl -XDELETE "http://localhost:9200/wikipedia-20200820"
 pkill -F /srv/tmp/elasticsearch-7.10.1/pid
@@ -37,5 +39,9 @@ sock.close()
 
 Need to run the follwing script  after CD into the repo/scrips/discvoery_cluster directory
 ```
-
+bash create_all_exclusive_nodes_using_screen.sh
+```
+Then 
+```
+bash copy_and_run_elasticsearch_all.sh
 ```
