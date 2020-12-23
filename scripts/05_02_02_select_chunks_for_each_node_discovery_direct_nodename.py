@@ -346,7 +346,7 @@ counter = 0
 total_discovery_nodes = 47
 
 while chunks:
-    nodenum_to_filelist[counter%total_discovery_nodes].append(chunks.pop())
+    nodenum_to_filelist[counter%total_discovery_nodes].append(chunks.pop().split(".")[0])
     counter += 1
 
 for current_node, fnames in nodenum_to_filelist.items():
