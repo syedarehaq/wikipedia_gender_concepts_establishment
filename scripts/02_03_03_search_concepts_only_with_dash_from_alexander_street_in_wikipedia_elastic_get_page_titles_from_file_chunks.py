@@ -25,6 +25,7 @@ import csv
 import pandas as pd
 import requests
 import pprint
+import argparse
 ## imported from custom helper library accompanying this project
 from helpers.elastic_scroll import ElasticScroll
 
@@ -35,33 +36,40 @@ dname = os.path.dirname(abspath)
 os.chdir(dname)
 
 # %%
+parser = argparse.ArgumentParser(
+        description="Script to bulk insert a newline separated json file",
+        formatter_class=argparse.ArgumentDefaultsHelpFormatter)
+parser.add_argument('-i','--input', help='name of the chunked file that contains the phrases that it will be looking for')
+args = parser.parse_args()
+# %%
+file_basenames = [args.input]
+# %%
 output_code = "02_03_03"
 
 # %%
 ## Load the alexander streets concpets created by Laura
-base_fname = "phrases3_min3_20201217" # phrases2_min2_20201217
-phrase_lengths_this_turns = [3,4,5]
-max_chunk_nums = {
-    "phrases3_min3_20201217":{
-        1:71,
-        2:46,
-        3:7,
-        4:1,
-        5:0,
-    },
-    "phrases2_min2_20201217":{
-        1:58,
-        2:103,
-        3:21,
-        4:3,
-        5:0,
-    }
-}
+# base_fname = "phrases3_min3_20201217" # phrases2_min2_20201217
+# phrase_lengths_this_turns = [3,4,5]
+# max_chunk_nums = {
+#     "phrases3_min3_20201217":{
+#         1:71,
+#         2:46,
+#         3:7,
+#         4:1,
+#         5:0,
+#     },
+#     "phrases2_min2_20201217":{
+#         1:58,
+#         2:103,
+#         3:21,
+#         4:3,
+#         5:0,
+#     }
+# }
 
-file_basenames = []
-for phrase_length in phrase_lengths_this_turns:
-    for chunk_num in range(max_chunk_nums[base_fname][phrase_length]+1):
-        file_basenames.append("%s_conceptsize_%d_chunknum_%d" %(base_fname,phrase_length,chunk_num))
+# for phrase_length in phrase_lengths_this_turns:
+#     for chunk_num in range(max_chunk_nums[base_fname][phrase_length]+1):
+#         file_basenames.append("%s_conceptsize_%d_chunknum_%d" %(base_fname,phrase_length,chunk_num))
 
 for chunked_file_basename in file_basenames:
     print(chunked_file_basename)

@@ -338,14 +338,18 @@ chunks = ["phrases2_min2_20201217_conceptsize_1_chunknum_0.csv",
 "phrases3_min3_20201217_conceptsize_4_chunknum_1.csv",
 "phrases3_min3_20201217_conceptsize_5_chunknum_0.csv",]
 
+## I will be working on 47 specific disvoery nodes
+discovery_nodenames = " ".join(["c3%d"%x for x in range(178,224+1)])
+
 nodenum_to_filelist = defaultdict(list)
 counter = 0
 total_discovery_nodes = 47
+
 while chunks:
-    nodenum_to_filelist[counter%total_discovery_nodes].append(chunks.pop().split(".csv")[0])
+    nodenum_to_filelist[counter%total_discovery_nodes].append(chunks.pop())
     counter += 1
 
 for current_node, fnames in nodenum_to_filelist.items():
-    with open(f"../input/derived/discovery_input_for_each_node/{output_code}_{current_node}.txt","w") as f:
+    with open(f"../input/derived/discovery_input_for_each_node/{discovery_nodenames[current_node]}.txt","w") as f:
         for fname in fnames:
             f.write(fname+"\n")
