@@ -14,6 +14,7 @@ python3 04_01_01_elastic_bulk_index.py --index wikipedia-20200820 --port 9200 --
 ```
 curl -XGET "http://localhost:9200/_cat/indices?v"
 curl -XDELETE "http://localhost:9200/wikipedia-20200820"
+pkill -F /srv/elasticsearch-7.10.1/pid
 ```
 
 ```
