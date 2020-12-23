@@ -5,7 +5,7 @@
 for nodename in c3178 c3179
 do
 	## Source: https://superuser.com/questions/454907/how-to-execute-a-command-in-screen-and-detach
-	screen -dmS $nodename bash -c "bash prepare_srun_single_node.sh "$nodename";"
+	screen -dmS $nodename"_elasticrun" bash -c "bash copy_elasticsearch_single_node.sh "$nodename";"
 	## Need to put anywhere in the bash command exec sh to make sure the screen 
 	## stays after all the execution. For this one we are keeping it at the end
 	## of the bash script
