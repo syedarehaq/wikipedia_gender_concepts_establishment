@@ -25,7 +25,6 @@ import csv
 import pandas as pd
 import requests
 import pprint
-from tqdm import tqdm
 ## imported from custom helper library accompanying this project
 from helpers.elastic_scroll import ElasticScroll
 
