@@ -33,3 +33,8 @@ else:
    print("Port is not open")
 sock.close()
 ```
+
+Need to run the follwing script  after CD into the repo/scrips/discvoery_cluster directory
+```
+
+```
