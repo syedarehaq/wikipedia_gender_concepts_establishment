@@ -1,6 +1,8 @@
 #!/bin/bash
 nodename=$1
 echo $nodename;
+module load python/3.8.1;
+source /work/nelsongroup/haque.s/chroniclingamerica/wikipedia_gender_concepts_establishment/venv/bin/activate;
 input_file_current_node="/work/nelsongroup/haque.s/chroniclingamerica/wikipedia_gender_concepts_establishment/input/derived/discovery_input_for_each_node/"$1".txt"
 while IFS= read -r line
 do
