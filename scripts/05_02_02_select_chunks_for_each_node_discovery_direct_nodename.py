@@ -339,7 +339,7 @@ chunks = ["phrases2_min2_20201217_conceptsize_1_chunknum_0.csv",
 "phrases3_min3_20201217_conceptsize_5_chunknum_0.csv",]
 
 ## I will be working on 47 specific disvoery nodes
-discovery_nodenames = " ".join(["c3%d"%x for x in range(178,224+1)])
+discovery_nodenames = ["c3%d"%x for x in range(178,224+1)]
 
 nodenum_to_filelist = defaultdict(list)
 counter = 0
