@@ -8,8 +8,18 @@ cp elasticsearch-7.10.1-linux-x86_64.tar.gz /srv/
 tar -xzf /srv/elasticsearch-7.10.1-linux-x86_64.tar.gz 
 module load oracle_java/jdk1.8.0_181
 curl -XGET "127.0.0.1:9200"
-python3 04_01_01_elastic_bulk_index.py --index wikipedia-20200820 --port 9200 --filename /work/nelsongroup/haque.s/wikipedia/ --bulksize 10000
-enwiki-20200820-pages-articles-multistream.json
+python3 04_01_01_elastic_bulk_index.py --index wikipedia-20200820 --port 9200 --filename /work/nelsongroup/haque.s/wikipedia/enwiki-20200820-pages-articles-multistream.json --bulksize 100
+```
+
+```
+curl -XGET "http://localhost:9200/_cat/indices?v"
+curl -XDELETE "http://localhost:9200/wikipedia-20200820"
+```
+
+```
+module load python/3.8.1
+source /work/nelsongroup/haque.s/chroniclingamerica/wikipedia_gender_concepts_establishment/venv/bin/activate
+python3 /work/nelsongroup/haque.s/chroniclingamerica/wikipedia_gender_concepts_establishment/scripts/04_01_01_elastic_bulk_index.py --index wikipedia-20200820 --port 9200 --filename /work/nelsongroup/haque.s/wikipedia/enwiki-20200820-pages-articles-multistream.json --bulksize 100
 ```
 
 ```

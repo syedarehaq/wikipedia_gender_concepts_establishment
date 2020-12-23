@@ -4,7 +4,7 @@
 #SBATCH --nodes=1
 #SBATCH --mem=200GB
 #SBATCH --cpus-per-task=16
-#SBATCH --time=7-24:00:00
+#SBATCH --time=30-24:00:00
 #SBATCH --exclusive
 #SBATCH --output=chronam_%j.out
 #SBATCH --error=chronam_%j.err
@@ -12,10 +12,18 @@
 source ~/.bashrc
 
 module load python/3.8.1
-run elastic in the background, get the process id
-sleep for 30 seconds to let it start
-start putting the data into elastic using the elastic script from payel
-python
+#copy the things to the /srv/ folder
+cp -r /home/haque.s/elasticsearch-7.10.1 /srv/elasticsearch-7.10.1
+#run elastic in the background, get the process id
+/srv/elasticsearch-7.10.1/bin/elasticsearch -d -p /srv/elasticsearch-7.10.1/pid
+# sleep for 30 seconds to let it start
+sleep 10
+# Activate the python environment
+source /work/nelsongroup/haque.s/chroniclingamerica/wikipedia_gender_concepts_establishment/venv/bin/activate
+# CD into script folder
+
+
+
 achine=$1
 input_chunkfiles=$2
 source /work/nelsongroup/haque.s/chroniclingamerica/wikipedia_gender_concepts_establishment/venv/bin/activate

@@ -29,6 +29,12 @@ from tqdm import tqdm
 ## imported from custom helper library accompanying this project
 from helpers.elastic_scroll import ElasticScroll
 
+import os
+
+abspath = os.path.abspath(__file__)
+dname = os.path.dirname(abspath)
+os.chdir(dname)
+
 # %%
 output_code = "02_03_03"
 
