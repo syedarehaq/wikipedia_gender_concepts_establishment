@@ -28,5 +28,5 @@ mkdir -p $python_search_output_dir_page_text
 
 for nodename in c3178 c3179
 do
-	sbatch --output=sbatch_output_dir"/"$nodename"_%j.out" --error=sbatch_error_dir"/"$nodename"_%j.err" --nodelist=$nodename run_wikisearch_single.sh $nodename $corpus
+	sbatch --output=sbatch_output_dir"/"$nodename"_%j.out" --error=sbatch_error_dir"/"$nodename"_%j.err" --partition=netsi_standard --nodelist=$nodename run_wikisearch_single.sh $nodename $corpus
 done
