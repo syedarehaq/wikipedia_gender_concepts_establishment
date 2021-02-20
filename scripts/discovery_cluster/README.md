@@ -45,3 +45,7 @@ Then
 ```
 bash copy_and_run_elasticsearch_all.sh
 ```
+Then 
+```
+
+```
