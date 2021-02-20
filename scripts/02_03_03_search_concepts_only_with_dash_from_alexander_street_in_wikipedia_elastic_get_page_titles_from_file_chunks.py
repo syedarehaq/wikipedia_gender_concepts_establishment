@@ -74,7 +74,7 @@ output_code = "02_03_03"
 #         file_basenames.append("%s_conceptsize_%d_chunknum_%d" %(base_fname,phrase_length,chunk_num))
 
 for chunked_file_basename in file_basenames:
-    print(chunked_file_basename)
+    #print(chunked_file_basename)
     df_concepts = pd.read_csv(f"/work/nelsongroup/haque.s/chroniclingamerica/wikipedia_gender_concepts_establishment/input/derived/chunked_files/{corpus_name}/{chunked_file_basename}.csv", keep_default_na=False)
 
     alex_street_dash_separated_concepts = df_concepts["concept"].values
