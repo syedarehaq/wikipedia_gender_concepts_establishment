@@ -8,6 +8,7 @@ corpus=$2
 ## Copy the elasticsearch first to the /srv/tmp
 ## It has the index preloaded
 cp -r /home/haque.s/elasticsearch-7.10.1 /srv/tmp/elasticsearch-7.10.1;
+echo "finished copying the elasticsearch directory to srv tmp"
 sleep 5;
 /srv/tmp/elasticsearch-7.10.1/bin/elasticsearch -d -p /srv/tmp/elasticsearch-7.10.1/pid;
 ## Using elasticsearch with curl inside discovery cluster requires unsetting proxy
@@ -25,3 +26,5 @@ do
 	echo $line;
 	python3 /work/nelsongroup/haque.s/chroniclingamerica/wikipedia_gender_concepts_establishment/scripts/02_03_03_search_concepts_only_with_dash_from_alexander_street_in_wikipedia_elastic_get_page_titles_from_file_chunks.py --input $line --corpus $corpus;
 done < "$input_file_current_node"
+echo "deleting the elastic search directory from srv tmp"
+rm -rf /srv/tmp/elasticsearch-7.10.1;
