@@ -23,5 +23,5 @@ while IFS= read -r line || [ -n "$line" ];
 ## https://stackoverflow.com/questions/12916352/shell-script-read-missing-last-line
 do
 	echo $line;
-	#python3 /work/nelsongroup/haque.s/chroniclingamerica/wikipedia_gender_concepts_establishment/scripts/02_03_03_search_concepts_only_with_dash_from_alexander_street_in_wikipedia_elastic_get_page_titles_from_file_chunks.py --input $line --corpus $corpus;
+	python3 /work/nelsongroup/haque.s/chroniclingamerica/wikipedia_gender_concepts_establishment/scripts/02_03_03_search_concepts_only_with_dash_from_alexander_street_in_wikipedia_elastic_get_page_titles_from_file_chunks.py --input $line --corpus $corpus;
 done < "$input_file_current_node"
