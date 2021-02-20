@@ -10,8 +10,9 @@
 #SBATCH --error=wiki_all_%j.err
 
 
+corpus=$1
 basedir="/work/nelsongroup/haque.s/chroniclingamerica/wikipedia_gender_concepts_establishment/scripts/discovery_cluster/"
-corpus=$2
+
 mkdir -p $basedir$corpus
 
 sbatch_output_dir=$basedir$corpus"/slurm_output"
