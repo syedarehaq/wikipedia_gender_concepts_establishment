@@ -1,0 +1,4 @@
+brown_phrases_conceptsize_3_chunknum_24
+brown_phrases_conceptsize_2_chunknum_72
+brown_phrases_conceptsize_2_chunknum_3
+brown_phrases_conceptsize_2_chunknum_123
