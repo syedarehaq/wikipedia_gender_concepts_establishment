@@ -77,7 +77,7 @@ for chunked_file_basename in file_basenames:
     print(chunked_file_basename)
     df_concepts = pd.read_csv(f"/work/nelsongroup/haque.s/chroniclingamerica/wikipedia_gender_concepts_establishment/input/derived/chunked_files/{corpus_name}/{chunked_file_basename}.csv", keep_default_na=False)
 
-    alex_street_dash_separated_concepts = df_concepts["concept_from_alex_street"].values
+    alex_street_dash_separated_concepts = df_concepts["concept"].values
 
     # ### For testing
     # alex_street_concepts_to_dash_separated_concept = {
@@ -98,7 +98,7 @@ for chunked_file_basename in file_basenames:
 
     for text_search_field in dict_text_search_fields_to_df_column:
         print("Currently running %s" %text_search_field)
-        with open("/work/nelsongroup/haque.s/chroniclingamerica/wikipedia_gender_concepts_establishment/output/untracked/chunked_output/{corpus_name}/searched_in_%s/%s_%s_found_in_wikipedia_%s.json" %(text_search_field,output_code,chunked_file_basename,text_search_field),"a", encoding="utf-8") as f:     
+        with open(f"/work/nelsongroup/haque.s/chroniclingamerica/wikipedia_gender_concepts_establishment/output/untracked/chunked_output/{corpus_name}/searched_in_{text_search_field}/{output_code}_{chunked_file_basename}_found_in_wikipedia_{text_search_field}.json","a", encoding="utf-8") as f:     
             for dash_separated_concept in alex_street_dash_separated_concepts:
                 print("%s" %dash_separated_concept)
                 concept_to_wiki_title_docs = dict()
