@@ -13,6 +13,7 @@ sleep 5;
 /srv/tmp/elasticsearch-7.10.1/bin/elasticsearch -d -p /srv/tmp/elasticsearch-7.10.1/pid;
 ## Using elasticsearch with curl inside discovery cluster requires unsetting proxy
 unset http_proxy;
+curl -XGET "http://localhost:9200/_cat/indices?v";
 sleep 5;
 module load python/3.8.1
 source /work/nelsongroup/haque.s/chroniclingamerica/wikipedia_gender_concepts_establishment/venv/bin/activate
