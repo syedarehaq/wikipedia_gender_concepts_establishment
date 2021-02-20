@@ -16,9 +16,7 @@ basedir="/work/nelsongroup/haque.s/chroniclingamerica/wikipedia_gender_concepts_
 mkdir -p $basedir$corpus
 
 sbatch_output_dir=$basedir$corpus"/slurm_output"
-echo $sbatch_output_dir
 sbatch_error_dir=$basedir$corpus"/slurm_error"
-echo $sbatch_output_dir
 mkdir -p $sbatch_output_dir
 mkdir -p $sbatch_error_dir
 
@@ -28,7 +26,7 @@ mkdir -p $python_search_output_dir_page_title
 mkdir -p $python_search_output_dir_page_text
 
 
-# for nodename in c3178 c3179
-# do
-# 	sbatch --output=sbatch_output_dir"/"$nodename_%j.out --error=sbatch_error_dir"/"$nodename_%j.err --nodelist=$nodename run_wikisearch_single.sh $nodename $corpus
-# done
+for nodename in c3178 c3179
+do
+	sbatch --output=sbatch_output_dir"/"$nodename"_%j.out" --error=sbatch_error_dir"/"$nodename"_%j.err" --nodelist=$nodename run_wikisearch_single.sh $nodename $corpus
+done
