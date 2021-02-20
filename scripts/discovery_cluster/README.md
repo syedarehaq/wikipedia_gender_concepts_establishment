@@ -47,5 +47,14 @@ bash copy_and_run_elasticsearch_all.sh
 ```
 Then 
 ```
+bash python_search_all.sh
+```
+Then for cleanup we neeed to do a few things:
+
+First
+Remove all the screens with the "pythonsearch" suffix:
+```
+screen -ls | grep -E 'pythonsearch' | awk -F ' ' '{print $1}'| while read s; do screen -XS $s quit; done
 
 ```
+source: https://unix.stackexchange.com/questions/20435/killing-multiple-gnu-screen-sessions-with-the-same-name
