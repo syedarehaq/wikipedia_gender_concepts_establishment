@@ -56,7 +56,11 @@ class ElasticScroll(object):
         #print(queries)
         has_scroll_ctx = False
         while True:
-            response = self.session.post(url=urls[has_scroll_ctx], json=queries[has_scroll_ctx])
+            proxies = {
+                'http': None,
+                'https': None,
+            }
+            response = self.session.post(url=urls[has_scroll_ctx], json=queries[has_scroll_ctx], proxies=proxies)
             response.raise_for_status()
             json_data = response.json()
             scroll_id, has_scroll_ctx = json_data.get('_scroll_id'), True

@@ -20,10 +20,10 @@ sbatch_error_dir=$basedir$corpus"/slurm_error"
 mkdir -p $sbatch_output_dir
 mkdir -p $sbatch_error_dir
 
-python_search_output_dir_page_title="/work/nelsongroup/haque.s/chroniclingamerica/wikipedia_gender_concepts_establishment/output/untracked/chunked_output/"$corpus"/searched_in_page_title"
-python_search_output_dir_page_text="/work/nelsongroup/haque.s/chroniclingamerica/wikipedia_gender_concepts_establishment/output/untracked/chunked_output/"$corpus"/searched_in_text"
-mkdir -p $python_search_output_dir_page_title
-mkdir -p $python_search_output_dir_page_text
+python_search_output_dir_page_title="/work/nelsongroup/haque.s/chroniclingamerica/wikipedia_gender_concepts_establishment/output/untracked/chunked_output/"$corpus"/searched_in_page_title";
+python_search_output_dir_page_text="/work/nelsongroup/haque.s/chroniclingamerica/wikipedia_gender_concepts_establishment/output/untracked/chunked_output/"$corpus"/searched_in_text";
+mkdir -p $python_search_output_dir_page_title;
+mkdir -p $python_search_output_dir_page_text;
 
 
 for nodename in c3178 c3179
