@@ -15,11 +15,21 @@ Output
 from collections import defaultdict
 import glob
 from os.path import basename
+import os
+import argparse
+
+# %%
+# %%
+parser = argparse.ArgumentParser(
+        description="Script to crete list files containing concepts, for each discovery node that it will process",
+        formatter_class=argparse.ArgumentDefaultsHelpFormatter)
+parser.add_argument('-C','--corpus', help="just the name of the target corpus file that laura created, example: 'brown_phrases_oneword'" )
+args = parser.parse_args()
 
 # %%
 output_code = "05_02_03"
 
-base_fname = "brown_phrases"
+base_fname = args.corpus
 chunks_directory = f"../input/derived/chunked_files/{base_fname}/*"
 filenames = glob.glob(chunks_directory)
 
@@ -81,8 +91,9 @@ total_discovery_nodes = 47
 while chunks:
     nodenum_to_filelist[counter%total_discovery_nodes].append(chunks.pop().split(".")[0])
     counter += 1
-
+output_basedir = f"../input/derived/discovery_input_for_each_node/{base_fname}"
+os.mkdir(output_basedir)
 for current_node, fnames in nodenum_to_filelist.items():
-    with open(f"../input/derived/discovery_input_for_each_node/{base_fname}/{discovery_nodenames[current_node]}.txt","w") as f:
+    with open(f"{output_basedir}/{discovery_nodenames[current_node]}.txt","w") as f:
         for fname in fnames:
             f.write(fname+"\n")

@@ -58,3 +58,5 @@ screen -ls | grep -E 'pythonsearch' | awk -F ' ' '{print $1}'| while read s; do 
 
 ```
 source: https://unix.stackexchange.com/questions/20435/killing-multiple-gnu-screen-sessions-with-the-same-name
+
+Then inside all of the session delete the /srv/tmp/elasticsearch

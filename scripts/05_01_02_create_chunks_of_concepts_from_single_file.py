@@ -17,19 +17,28 @@ import pandas as pd
 from collections import Counter
 import numpy as np
 import xxhash
+import os
+import argparse
 
 # %%
+parser = argparse.ArgumentParser(
+        description="Script to crete chunks of a corpus",
+        formatter_class=argparse.ArgumentDefaultsHelpFormatter)
+parser.add_argument('-C','--corpus', help='just the name of the corpus file that I will be chunking. The corpus file should be in the inputs/raw/ dierectory')
+args = parser.parse_args()
+# %%
+## Load the concpets created by Laura
+base_fname = args.corpus #"brown_phrases_oneword"#"brown_phrases" # phrases2_min2_202011217
+# %%
 xxhash_seed = 42
-output_code = "05_02_01"
+output_code = "05_01_02"
 
 ## If the column name is None then there is no 
 ## header. Otherwise we have a header name of the
 ## column we wish to use
+## TODO: If there is actaully a header column, take it as an argument
 concept_column_name = None
 
-# %%
-## Load the concpets created by Laura
-base_fname = "brown_phrases" # phrases2_min2_202011217
 if not concept_column_name:
     ## We do not have a header
     df_concepts = pd.read_csv(f"../input/raw/{base_fname}.csv", keep_default_na=False, header = None)
@@ -56,10 +65,14 @@ def chunks(lst, n):
 ## For the filename lets start with the concept length then the chunk number
 single_chunk_size = 100
 
+## now create a directory to put the chunks
+output_basedir = f"../input/derived/chunked_files/{base_fname}"
+os.mkdir(output_basedir)
+
 for phrase_length in reversed(range(min_concept_lenth,max_concept_length+1)):
     current_lengthed_phrases = [phrase for phrase in concepts_to_search_for if len(phrase.strip().split())==phrase_length]
     for chunk_num,phrases_in_current_chunk in enumerate(chunks(current_lengthed_phrases,single_chunk_size)):
         df = pd.DataFrame(phrases_in_current_chunk,columns = ["concept"])
         df["concept_id"] = df["concept"].apply(lambda x: str(xxhash.xxh32(x,seed=xxhash_seed).intdigest()))
         df = df[["concept_id","concept"]]
-        df.to_csv(f"../input/derived/chunked_files/{base_fname}/{base_fname}_conceptsize_{phrase_length}_chunknum_{chunk_num}.csv",index=False)
+        df.to_csv(f"{output_basedir}/{base_fname}_conceptsize_{phrase_length}_chunknum_{chunk_num}.csv",index=False)
