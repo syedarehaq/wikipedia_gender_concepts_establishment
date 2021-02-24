@@ -37,6 +37,7 @@ chunks = sorted([basename(x) for x in filenames])
 ## I will be working on 47 specific disvoery nodes
 #discovery_nodenames = ["c3%d"%x for x in range(178,224+1)]
 discovery_nodenames = ['c3119',
+ 'c3177',
  'c3178',
  'c3179',
  'c3180',
@@ -58,7 +59,7 @@ discovery_nodenames = ['c3119',
  'c3197',
  'c3198',
  'c3199',
- 'c3200',
+ #'c3200',
  'c3201',
  'c3202',
  'c3203',

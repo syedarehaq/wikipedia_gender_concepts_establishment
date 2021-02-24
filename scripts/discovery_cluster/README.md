@@ -37,6 +37,11 @@ else:
 sock.close()
 ```
 
+Allocate a node in exclusive mode just for testing
+```
+srun --pty --export=ALL --nodes=1 --partition=netsi_standard --nodelist=c3178 --exclusive /bin/bash;
+
+```
 
 ### Actual running starts here:
 
