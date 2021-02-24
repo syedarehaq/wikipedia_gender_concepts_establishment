@@ -4,7 +4,7 @@ echo $nodename;
 module load python/3.8.1;
 source /work/nelsongroup/haque.s/chroniclingamerica/wikipedia_gender_concepts_establishment/venv/bin/activate;
 corpus=$2
-input_file_current_node="/work/nelsongroup/haque.s/chroniclingamerica/wikipedia_gender_concepts_establishment/input/derived/discovery_input_for_each_node/"$corpus"/"$1".txt"
+input_file_current_node="/work/nelsongroup/haque.s/chroniclingamerica/wikipedia_gender_concepts_establishment/input/derived/discovery_input_for_each_node/"$corpus"/"$nodename".txt"
 ## reading line by line of a file 
 ## https://www.cyberciti.biz/faq/unix-howto-read-line-by-line-from-file/
 while IFS= read -r line || [ -n "$line" ];
