@@ -36,8 +36,9 @@ filenames = glob.glob(chunks_directory)
 chunks = sorted([basename(x) for x in filenames])
 ## I will be working on 47 specific disvoery nodes
 #discovery_nodenames = ["c3%d"%x for x in range(178,224+1)]
-discovery_nodenames = ['c3119',
- 'c3177',
+discovery_nodenames = ['c3118',
+ 'c3119',
+ #'c3177',
  'c3178',
  'c3179',
  'c3180',

@@ -45,6 +45,8 @@ srun --pty --export=ALL --nodes=1 --partition=netsi_standard --nodelist=c3178 --
 
 ### Actual running starts here:
 
+**Caveat: Do not use c3177, you do not have write permission in `/srv/tmp` in c3177, and also right now c3200 in down mode**
+
 Need to run the follwing script  after CD into the `repo/scripts/discvoery_cluster` directory
 ```
 bash create_all_exclusive_nodes_using_screen.sh
