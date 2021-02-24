@@ -13,7 +13,7 @@
 # 	#screen -S c3179 -p 0 -X stuff "mkdir /srv/tmp/mishuk`echo -ne '\015'`"
 # done
 
-while IFS= read -r line || [ -n "$nodename" ];
+while IFS= read -r nodename || [ -n "$nodename" ];
 ## correction for missing last line
 ## https://stackoverflow.com/questions/12916352/shell-script-read-missing-last-line
 do

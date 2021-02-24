@@ -7,7 +7,7 @@
 # 	ssh $nodename 'bash -s' < restart_elasticsearch_single.sh &
 # done
 
-while IFS= read -r line || [ -n "$nodename" ];
+while IFS= read -r nodename || [ -n "$nodename" ];
 ## correction for missing last line
 ## https://stackoverflow.com/questions/12916352/shell-script-read-missing-last-line
 do

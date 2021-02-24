@@ -31,7 +31,7 @@ mkdir -p $python_search_output_dir_page_text;
 # 	sbatch --output=$sbatch_output_dir"/"$nodename"_%j.out" --error=$sbatch_error_dir"/"$nodename"_%j.err" --partition=netsi_standard --nodelist=$nodename run_wikisearch_single.sh $nodename $corpus
 # done
 
-while IFS= read -r line || [ -n "$nodename" ];
+while IFS= read -r nodename || [ -n "$nodename" ];
 ## correction for missing last line
 ## https://stackoverflow.com/questions/12916352/shell-script-read-missing-last-line
 do

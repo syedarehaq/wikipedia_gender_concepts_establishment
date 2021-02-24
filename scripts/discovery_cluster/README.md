@@ -39,13 +39,14 @@ sock.close()
 
 Allocate a node in exclusive mode just for testing
 ```
-srun --pty --export=ALL --nodes=1 --partition=netsi_standard --nodelist=c3178 --exclusive /bin/bash;
+srun --pty --export=ALL --nodes=1 --partition=netsi_standard --nodelist=c3116 --exclusive /bin/bash;
 
 ```
 
 ### Actual running starts here:
 
-**Caveat: Do not use c3177, you do not have write permission in `/srv/tmp` in c3177, and also right now c3200 in down mode**
+**Caveat: Do not use c3177, you do not have write permission in `/srv/tmp` in c3177, and also right now c3200 in down mode**\
+First create a proper list of evailable nodes indiscovery cluster using sinfo and put the names in `available_nodelist.txt`.
 
 Need to run the follwing script  after CD into the `repo/scripts/discvoery_cluster` directory
 ```

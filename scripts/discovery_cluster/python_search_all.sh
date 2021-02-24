@@ -10,7 +10,7 @@ mkdir -p "/work/nelsongroup/haque.s/chroniclingamerica/wikipedia_gender_concepts
 # 	screen -dmS $nodename"_pythonsearch" bash -c "bash python_search_single_ssh.sh "$nodename" "$corpus"; exec sh;" &
 # done
 
-while IFS= read -r line || [ -n "$nodename" ];
+while IFS= read -r nodename || [ -n "$nodename" ];
 ## correction for missing last line
 ## https://stackoverflow.com/questions/12916352/shell-script-read-missing-last-line
 do
