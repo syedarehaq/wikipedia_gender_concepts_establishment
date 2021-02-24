@@ -56,13 +56,7 @@ Then
 ```
 bash copy_and_run_elasticsearch_all.sh
 ```
-Then first change the corpus name inside `python_search_all.sh`. 
-Also create two directories using the following command:
-```
-mkdir -p /work/nelsongroup/haque.s/chroniclingamerica/wikipedia_gender_concepts_establishment/output/untracked/chunked_output/
-```
-
-Then 
+Then first change the corpus name inside `python_search_all.sh`. After that:
 ```
 bash python_search_all.sh
 ```
