@@ -26,7 +26,14 @@ mkdir -p $python_search_output_dir_page_title;
 mkdir -p $python_search_output_dir_page_text;
 
 
-for nodename in c3178 c3179
+# for nodename in c3178 c3179
+# do
+# 	sbatch --output=$sbatch_output_dir"/"$nodename"_%j.out" --error=$sbatch_error_dir"/"$nodename"_%j.err" --partition=netsi_standard --nodelist=$nodename run_wikisearch_single.sh $nodename $corpus
+# done
+
+while IFS= read -r line || [ -n "$nodename" ];
+## correction for missing last line
+## https://stackoverflow.com/questions/12916352/shell-script-read-missing-last-line
 do
 	sbatch --output=$sbatch_output_dir"/"$nodename"_%j.out" --error=$sbatch_error_dir"/"$nodename"_%j.err" --partition=netsi_standard --nodelist=$nodename run_wikisearch_single.sh $nodename $corpus
-done
+done < "available_nodelist.txt"

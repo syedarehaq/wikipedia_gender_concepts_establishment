@@ -36,56 +36,10 @@ filenames = glob.glob(chunks_directory)
 chunks = sorted([basename(x) for x in filenames])
 ## I will be working on 47 specific disvoery nodes
 #discovery_nodenames = ["c3%d"%x for x in range(178,224+1)]
-discovery_nodenames = ['c3118',
- 'c3119',
- #'c3177',
- 'c3178',
- 'c3179',
- 'c3180',
- 'c3181',
- 'c3182',
- 'c3183',
- 'c3184',
- 'c3185',
- 'c3186',
- 'c3187',
- 'c3188',
- 'c3190',
- 'c3191',
- 'c3192',
- 'c3193',
- 'c3194',
- 'c3195',
- 'c3196',
- 'c3197',
- 'c3198',
- 'c3199',
- #'c3200',
- 'c3201',
- 'c3202',
- 'c3203',
- 'c3204',
- 'c3205',
- 'c3206',
- 'c3207',
- 'c3208',
- 'c3209',
- 'c3210',
- 'c3211',
- 'c3212',
- 'c3213',
- 'c3214',
- 'c3215',
- 'c3216',
- 'c3217',
- 'c3218',
- 'c3219',
- 'c3220',
- 'c3221',
- 'c3222',
- 'c3223',
- 'c3224']
-
+discovery_nodenames = []
+with open("./discovery_cluster/available_nodelist.txt","r") as f:
+    for line in f:
+        discovery_nodenames.append(line.strip())
 nodenum_to_filelist = defaultdict(list)
 counter = 0
 total_discovery_nodes = 47
