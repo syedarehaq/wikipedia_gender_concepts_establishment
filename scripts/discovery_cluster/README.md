@@ -37,7 +37,10 @@ else:
 sock.close()
 ```
 
-Need to run the follwing script  after CD into the repo/scrips/discvoery_cluster directory
+
+### Actual running starts here:
+
+Need to run the follwing script  after CD into the `repo/scripts/discvoery_cluster` directory
 ```
 bash create_all_exclusive_nodes_using_screen.sh
 ```
@@ -45,6 +48,12 @@ Then
 ```
 bash copy_and_run_elasticsearch_all.sh
 ```
+Then first change the corpus name inside `python_search_all.sh`. 
+Also create two directories using the following command:
+```
+mkdir -p /work/nelsongroup/haque.s/chroniclingamerica/wikipedia_gender_concepts_establishment/output/untracked/chunked_output/
+```
+
 Then 
 ```
 bash python_search_all.sh
@@ -55,6 +64,11 @@ First
 Remove all the screens with the "pythonsearch" suffix:
 ```
 screen -ls | grep -E 'pythonsearch' | awk -F ' ' '{print $1}'| while read s; do screen -XS $s quit; done
+
+```
+Then remove all the initial screens, all of the screen started with "c" for example c3117 is a nodename in the discovery cluster:
+```
+screen -ls | grep -E 'c' | awk -F ' ' '{print $1}'| while read s; do screen -XS $s quit; done
 
 ```
 source: https://unix.stackexchange.com/questions/20435/killing-multiple-gnu-screen-sessions-with-the-same-name
