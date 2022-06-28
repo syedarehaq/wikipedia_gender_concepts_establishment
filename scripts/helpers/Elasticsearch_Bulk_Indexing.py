@@ -8,19 +8,22 @@ import requests
 class ElasticBulk(object):
     """Class for indexing documents in bulk"""
 
-    def __init__(self, host, index, doc_type="_doc", session=requests.session(), bulk_size=1000):
+    def __init__(self, host, index, doc_type, session=requests.session(), bulk_size=1000):
         """Instantiates an ElasticBulk object, sets default values
 
         Args:
             host (str): Elasticsearch host url. Example: ``http://localhost:9200``.
             index (str): Elasticsearch index name. Example: ``my_index``.
-            doc_type (str): Elasticsearch document type. Example: ``_doc``.
+            doc_type (str): Elasticsearch document type. Example: ``_doc``. Since Elastic version 8.0, there is no need of explicit bulk indexing
             session (:obj:`Session`, optional): Http request session object.
                 If not provided, creates a new session object.
             bulk_size (int, optional): Bulk operation size. Default: ``1000``.
         """
         self.session = session if session else requests.session()
-        self.bulk_url = f'{host}/{index}/{doc_type}/_bulk'
+        if doc_type:
+            self.bulk_url = f'{host}/{index}/{doc_type}/_bulk'
+        else:
+            self.bulk_url = f'{host}/{index}/_bulk'
         self.bulk_size = bulk_size
         self.headers = {'Content-Type': 'application/x-ndjson'}
     
